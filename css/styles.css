@@ -657,49 +657,55 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(42, 20, 32, 0.58) 0%,
-    rgba(42, 20, 32, 0.34) 14%,
-    rgba(42, 20, 32, 0.08) 28%,
-    rgba(42, 20, 32, 0) 40%
-  );
+  background: none;
 }
 
 #card-1 .hero-copy {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 14px 10px 0 14px;
   pointer-events: none;
 }
 
 #card-1 .hero-title {
-  align-self: stretch;
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: var(--jar-top, 34.3%);
   margin: 0;
-  padding: 2px 6px 0;
+  transform: translateY(calc(-100% - 10px));
   text-align: center;
   font-family: "Anton", "Arial Narrow", Impact, sans-serif;
   font-weight: 400;
-  font-size: clamp(1.45rem, 7.4cqi, 2rem);
+  font-size: clamp(1.35rem, 7cqi, 1.9rem);
   line-height: 1.05;
   letter-spacing: 0.01em;
   color: #fff;
   text-wrap: balance;
   text-shadow:
-    0 1px 2px rgba(28, 18, 32, 0.55),
-    0 3px 14px rgba(28, 18, 32, 0.4);
+    0 1px 2px rgba(28, 18, 32, 0.7),
+    0 2px 12px rgba(28, 18, 32, 0.55);
+}
+
+#card-1 .hero-title::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 2%;
+  right: 2%;
+  top: -0.45em;
+  bottom: -0.55em;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center, rgba(42, 20, 32, 0.46) 0%, rgba(42, 20, 32, 0.16) 58%, rgba(42, 20, 32, 0) 76%);
 }
 
 #card-1 .seal {
   --seal: #588b50;
-  position: relative;
+  position: absolute;
   z-index: 2;
-  width: clamp(108px, 34cqi, 142px);
-  margin-top: 8px;
-  margin-right: clamp(4px, 2cqi, 12px);
+  right: 6px;
+  bottom: 8px;
+  width: clamp(78px, 22cqi, 96px);
   aspect-ratio: 1;
   pointer-events: none;
   filter: drop-shadow(0 8px 14px rgba(28, 18, 32, 0.22));
@@ -749,13 +755,13 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 }
 
 @media (max-height: 740px) {
-  #card-1 .hero-copy { padding-top: 10px; }
-  #card-1 .hero-title { font-size: clamp(1.28rem, 6.6cqi, 1.7rem); }
-  #card-1 .seal { width: clamp(96px, 30cqi, 122px); margin-top: 4px; }
+  #card-1 .hero-title { font-size: clamp(1.2rem, 6.4cqi, 1.6rem); }
+  #card-1 .seal { width: clamp(72px, 20cqi, 86px); bottom: 6px; right: 6px; }
 }
 
 @media (max-width: 340px) {
-  #card-1 .seal { width: clamp(92px, 32cqi, 112px); margin-right: 0; }
+  #card-1 .hero-title { font-size: clamp(1.12rem, 6.2cqi, 1.45rem); }
+  #card-1 .seal { width: clamp(68px, 22cqi, 80px); right: 4px; bottom: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

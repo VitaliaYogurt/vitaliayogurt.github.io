@@ -181,7 +181,31 @@ function initCarousel() {
   }
 
   setCurrent(0, false);
+  placeHero();
 }
+
+function placeHero() {
+  var card = document.querySelector("#card-1 .card-inner");
+  if (!card) return;
+  var w = card.clientWidth;
+  var h = card.clientHeight;
+  if (!w || !h) return;
+  var videoAspect = 1080 / 1920;
+  var jar = 0.343;
+  var top;
+  if (w / h > videoAspect) {
+    var dispH = w / videoAspect;
+    var crop = (dispH - h) / 2;
+    top = (jar * dispH - crop) / h;
+  } else {
+    top = jar;
+  }
+  top = Math.max(0.16, Math.min(0.62, top));
+  card.style.setProperty("--jar-top", (top * 100).toFixed(2) + "%");
+}
+
+window.addEventListener("resize", placeHero);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeHero);
 
 function initOrder() {
   var dialog = document.getElementById("order-dialog");
