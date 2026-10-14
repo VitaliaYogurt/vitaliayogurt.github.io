@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vitalia — Yogur de colágeno</title>
+  <meta name="description" content="Yogur con colágeno y proteína, sin azúcar añadida. $9 el paquete de 4 frascos. Entrega los sábados en Panamá.">
+  <meta name="theme-color" content="#FFF3EE">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Saira+Extra+Condensed:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+  <script src="js/config.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <img class="logo" src="assets/logo.png" alt="Vitalia" width="647" height="647">
+    </header>
+
+    <section class="stage" aria-roledescription="carrusel" aria-label="Por qué Vitalia">
+      <p class="sr-only" id="carousel-status" aria-live="polite"></p>
+      <div class="track" id="track" tabindex="0" aria-label="Beneficios. Desliza para ver más.">
+        <article class="card" id="card-1" data-title="Colágeno, proteína, sin azúcar añadida">
+          <div class="card-inner">
+            <div class="card-media" data-card-image="0"></div>
+            <p class="eyebrow">Yogur de colágeno</p>
+            <h1 class="display">Colágeno.<br>Proteína.<br>Sin azúcar añadida.</h1>
+            <ul class="tags">
+              <li>5 g de colágeno</li>
+              <li>12 g de proteína por porción de 200 g</li>
+              <li>Sin azúcar añadida</li>
+            </ul>
+            <p class="tagline">El yogur que cuida de ti.</p>
+          </div>
+        </article>
+
+        <article class="card" id="card-2" data-title="Bueno para tu panza">
+          <div class="card-inner">
+            <div class="card-media" data-card-image="1"></div>
+            <p class="eyebrow">Digestión</p>
+            <h2 class="display">Bueno para<br>tu panza</h2>
+            <p class="lede">Probióticos vivos que cuidan tu digestión todos los días.</p>
+          </div>
+        </article>
+
+        <article class="card" id="card-3" data-title="Cremoso y natural">
+          <div class="card-inner">
+            <div class="card-media" data-card-image="2"></div>
+            <p class="eyebrow">De Panamá</p>
+            <h2 class="display">Cremoso<br>y natural</h2>
+            <p class="lede">Hecho en Panamá con leche entera, péptidos de colágeno y probióticos.</p>
+          </div>
+        </article>
+
+        <article class="card card-price is-inverse" id="card-4" data-title="Directo a tu puerta">
+          <div class="card-inner">
+            <div class="card-media" data-card-image="3"></div>
+            <p class="eyebrow">Entrega</p>
+            <h2 class="display">Directo a<br>tu puerta</h2>
+            <p class="price-block">
+              <span class="price" id="price-amount">$9</span>
+              <span class="price-caption" id="price-caption">por paquete de 4 frascos</span>
+            </p>
+            <p class="ship-line" id="ship-free">Envío gratis comprando 2 paquetes</p>
+            <p class="ship-line" id="ship-fee">Envío $5 en otros pedidos</p>
+            <p class="tagline">Pide hoy y recíbelo fresco el sábado.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="pager">
+        <button type="button" class="pager-btn" id="prev" aria-label="Tarjeta anterior">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="dots" id="dots" role="group" aria-label="Tarjetas"></div>
+        <button type="button" class="pager-btn" id="next" aria-label="Tarjeta siguiente">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <div class="bar">
+      <button type="button" class="btn btn-primary" id="order-open">Ordena ahora</button>
+      <a class="btn btn-wa" id="wa-bar" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 3C7.31 3 3.5 6.7 3.5 11.3c0 1.46.4 2.88 1.16 4.12L3.4 21l5.72-1.22a8.7 8.7 0 0 0 2.92.5c4.73 0 8.54-3.7 8.54-8.3C20.58 6.7 16.77 3 12.04 3zm4.96 11.72c-.2.58-1.18 1.1-1.64 1.16-.42.06-.96.08-1.55-.1-.36-.1-.82-.26-1.42-.5-2.5-1.08-4.12-3.6-4.24-3.76-.12-.18-1-1.32-1-2.52 0-1.2.64-1.78.86-2.02.22-.24.48-.3.64-.3h.46c.14 0 .34-.04.52.4.2.46.66 1.62.72 1.74.06.12.1.26.02.42-.08.16-.12.26-.24.4-.12.14-.26.3-.36.42-.12.12-.24.24-.1.46.14.22.62 1.02 1.34 1.66.92.82 1.7 1.08 1.94 1.2.24.12.38.1.52-.06.14-.16.6-.7.76-.94.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.58-.14 1.16z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <dialog id="order-dialog" aria-labelledby="order-title">
+    <div class="sheet">
+      <div class="dialog-bar">
+        <h2 id="order-title">Tu pedido</h2>
+        <button type="button" class="icon-btn" id="order-close" aria-label="Cerrar">×</button>
+      </div>
+      <div class="sheet-body">
+        <form id="order-form" novalidate>
+          <p id="form-alert" class="form-alert" role="alert" hidden></p>
+
+          <div class="summary">
+            <p class="unit-price" id="unit-price">$9 por paquete de 4 frascos</p>
+            <p class="rule" id="rule-free">Envío gratis comprando 2 paquetes</p>
+            <p class="rule" id="rule-fee">Envío $5 en otros pedidos</p>
+            <dl class="totals">
+              <div><dt>Yogur</dt><dd id="sum-sub">$9</dd></div>
+              <div><dt>Envío</dt><dd id="sum-ship">$5</dd></div>
+              <div class="grand"><dt>Total</dt><dd id="sum-total" aria-live="polite">$14</dd></div>
+            </dl>
+          </div>
+
+          <div class="field" id="field-qty">
+            <label for="qty">Paquetes</label>
+            <div class="stepper">
+              <button type="button" id="qty-minus" aria-label="Quitar un paquete">−</button>
+              <input id="qty" name="cantidad" inputmode="numeric" autocomplete="off" value="1" aria-describedby="jar-count">
+              <button type="button" id="qty-plus" aria-label="Agregar un paquete">+</button>
+            </div>
+            <p class="hint" id="jar-count"></p>
+            <p class="error" id="err-qty" hidden></p>
+          </div>
+
+          <fieldset class="field" id="field-sabor">
+            <legend>Sabor</legend>
+            <div class="flavors" id="flavors"></div>
+            <p class="error" id="err-sabor" hidden></p>
+          </fieldset>
+
+          <div class="field" id="field-fecha">
+            <label for="fecha">Día de entrega</label>
+            <select id="fecha" name="fecha"></select>
+            <p class="hint">Entregamos los sábados.</p>
+            <p class="error" id="err-fecha" hidden></p>
+          </div>
+
+          <div class="field" id="field-hora">
+            <label for="hora">Hora</label>
+            <select id="hora" name="hora"></select>
+            <p class="hint">De 9:00 a 14:00.</p>
+            <p class="error" id="err-hora" hidden></p>
+          </div>
+
+          <div class="field" id="field-nombre">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="name" autocapitalize="words" maxlength="80" placeholder="Tu nombre">
+            <p class="error" id="err-nombre" hidden></p>
+          </div>
+
+          <div class="field" id="field-celular">
+            <label for="celular">Celular</label>
+            <input id="celular" name="celular" type="tel" inputmode="tel" autocomplete="tel" autocapitalize="off" spellcheck="false" maxlength="20" placeholder="6838 4321">
+            <p class="hint">Un celular de Panamá, 8 dígitos.</p>
+            <p class="error" id="err-celular" hidden></p>
+          </div>
+
+          <div class="field" id="field-direccion">
+            <p class="label" id="direccion-label">Dirección de entrega</p>
+            <p class="hint" id="loc-status">Buscando tu ubicación…</p>
+            <div id="map" hidden></div>
+            <p class="hint" id="pin-coords" hidden></p>
+            <p class="hint" id="map-address" hidden></p>
+            <div id="manual-wrap" hidden>
+              <label class="sr-only" for="direccion">Dirección de entrega</label>
+              <textarea id="direccion" name="direccion" rows="3" maxlength="240" autocomplete="street-address" placeholder="Calle, edificio, barrio"></textarea>
+            </div>
+            <button type="button" class="text-btn" id="loc-alt">Escribir la dirección</button>
+            <p class="error" id="err-direccion" hidden></p>
+          </div>
+
+          <div class="field" id="field-comentarios">
+            <label for="comentarios">Comentarios</label>
+            <textarea id="comentarios" name="comentarios" rows="3" maxlength="400" placeholder="Apto, portería, referencias"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="submit-order">Confirmar pedido</button>
+        </form>
+
+        <section id="confirm" hidden>
+          <p id="confirm-lead"></p>
+          <dl class="confirm-list" id="confirm-list"></dl>
+          <a class="btn btn-wa btn-block" id="confirm-wa" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12.04 3C7.31 3 3.5 6.7 3.5 11.3c0 1.46.4 2.88 1.16 4.12L3.4 21l5.72-1.22a8.7 8.7 0 0 0 2.92.5c4.73 0 8.54-3.7 8.54-8.3C20.58 6.7 16.77 3 12.04 3zm4.96 11.72c-.2.58-1.18 1.1-1.64 1.16-.42.06-.96.08-1.55-.1-.36-.1-.82-.26-1.42-.5-2.5-1.08-4.12-3.6-4.24-3.76-.12-.18-1-1.32-1-2.52 0-1.2.64-1.78.86-2.02.22-.24.48-.3.64-.3h.46c.14 0 .34-.04.52.4.2.46.66 1.62.72 1.74.06.12.1.26.02.42-.08.16-.12.26-.24.4-.12.14-.26.3-.36.42-.12.12-.24.24-.1.46.14.22.62 1.02 1.34 1.66.92.82 1.7 1.08 1.94 1.2.24.12.38.1.52-.06.14-.16.6-.7.76-.94.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.58-.14 1.16z"/></svg>
+            Enviar por WhatsApp
+          </a>
+          <button type="button" class="text-btn" id="confirm-reset">Hacer otro pedido</button>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <noscript>
+    <p class="noscript">Para ordenar, activa JavaScript en el navegador.</p>
+  </noscript>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
