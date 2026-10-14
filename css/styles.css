@@ -751,5 +751,108 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .dot::after { transition: none; }
-  #card-1 .seal { animation: none; }
+  #card-1 .seal,
+  #card-2 .seal { animation: none; }
+}
+
+#card-2 .card-inner {
+  position: relative;
+  padding: 0;
+  gap: 0;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: #e8b4ae;
+}
+
+#card-2 .hero-picture,
+#card-2 .hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#card-2 .hero-photo {
+  object-fit: cover;
+  object-position: 58% 18%;
+  z-index: 0;
+}
+
+#card-2 .hero-title {
+  position: absolute;
+  z-index: 2;
+  top: 6%;
+  right: 8px;
+  left: auto;
+  width: max-content;
+  margin: 0;
+  text-align: right;
+  font-family: "Anton", "Arial Narrow", Impact, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.55rem, 8.4cqi, 2.35rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: none;
+}
+
+#card-2 .seal {
+  --seal: #588b50;
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  right: auto;
+  bottom: 12px;
+  width: clamp(109px, 30.8cqi, 134px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 14px rgba(28, 18, 32, 0.22));
+  animation: seal-float 5.2s ease-in-out infinite;
+  container-type: inline-size;
+}
+
+#card-2 .seal-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+#card-2 .seal-edge {
+  fill: #fff;
+  stroke: var(--seal);
+  stroke-width: 4.2;
+  stroke-linejoin: round;
+}
+
+#card-2 .seal-ring {
+  fill: none;
+  stroke: var(--seal);
+  stroke-width: 1.45;
+}
+
+#card-2 .seal-label {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  color: var(--seal);
+  font-family: "Nunito", "Avenir Next", "Segoe UI", sans-serif;
+  font-weight: 800;
+  font-size: 11cqi;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+@media (max-height: 740px) {
+  #card-2 .hero-title { font-size: clamp(1.4rem, 7.6cqi, 2rem); top: 5%; }
+  #card-2 .seal { width: clamp(101px, 28cqi, 120px); bottom: 10px; left: 8px; }
+}
+
+@media (max-width: 340px) {
+  #card-2 .hero-title { font-size: clamp(1.28rem, 7.2cqi, 1.7rem); right: 6px; }
+  #card-2 .seal { width: clamp(95px, 30.8cqi, 112px); left: 6px; bottom: 8px; }
 }
