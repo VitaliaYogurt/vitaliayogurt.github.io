@@ -676,27 +676,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   transform: translateY(calc(-100% - 10px));
   text-align: center;
   font-family: "Anton", "Arial Narrow", Impact, sans-serif;
-  font-weight: 400;
   font-size: clamp(1.35rem, 7cqi, 1.9rem);
   line-height: 1.05;
   letter-spacing: 0.01em;
   color: #fff;
+  font-weight: 700;
   text-wrap: balance;
-  text-shadow:
-    0 1px 2px rgba(28, 18, 32, 0.7),
-    0 2px 12px rgba(28, 18, 32, 0.55);
-}
-
-#card-1 .hero-title::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 2%;
-  right: 2%;
-  top: -0.45em;
-  bottom: -0.55em;
-  border-radius: 999px;
-  background: radial-gradient(ellipse at center, rgba(42, 20, 32, 0.46) 0%, rgba(42, 20, 32, 0.16) 58%, rgba(42, 20, 32, 0) 76%);
 }
 
 #card-1 .seal {
@@ -705,7 +690,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   z-index: 2;
   right: 6px;
   bottom: 8px;
-  width: clamp(78px, 22cqi, 96px);
+  width: clamp(109px, 30.8cqi, 134px);
   aspect-ratio: 1;
   pointer-events: none;
   filter: drop-shadow(0 8px 14px rgba(28, 18, 32, 0.22));
@@ -756,12 +741,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 
 @media (max-height: 740px) {
   #card-1 .hero-title { font-size: clamp(1.2rem, 6.4cqi, 1.6rem); }
-  #card-1 .seal { width: clamp(72px, 20cqi, 86px); bottom: 6px; right: 6px; }
+  #card-1 .seal { width: clamp(101px, 28cqi, 120px); bottom: 6px; right: 6px; }
 }
 
 @media (max-width: 340px) {
   #card-1 .hero-title { font-size: clamp(1.12rem, 6.2cqi, 1.45rem); }
-  #card-1 .seal { width: clamp(68px, 22cqi, 80px); right: 4px; bottom: 6px; }
+  #card-1 .seal { width: clamp(95px, 30.8cqi, 112px); right: 4px; bottom: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
