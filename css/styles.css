@@ -752,7 +752,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .dot::after { transition: none; }
   #card-1 .seal,
-  #card-2 .seal { animation: none; }
+  #card-2 .seal,
+  #card-3 .seal { animation: none; }
 }
 
 #card-2 .card-inner {
@@ -855,4 +856,123 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 @media (max-width: 340px) {
   #card-2 .hero-title { font-size: clamp(1.28rem, 7.2cqi, 1.7rem); right: 6px; }
   #card-2 .seal { width: clamp(95px, 30.8cqi, 112px); left: 6px; bottom: 8px; }
+}
+
+#card-3 .card-inner {
+  position: relative;
+  padding: 0;
+  gap: 0;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: #1a120e;
+  container-type: size;
+}
+
+#card-3 .hero-picture,
+#card-3 .hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#card-3 .hero-photo {
+  object-fit: cover;
+  object-position: 50% 50%;
+  z-index: 0;
+}
+
+#card-3 .hero-title {
+  position: absolute;
+  z-index: 2;
+  top: 4.6%;
+  left: 12px;
+  right: 12px;
+  margin: 0;
+  text-align: center;
+  font-family: "Anton", "Arial Narrow", Impact, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.586rem, 8cqi, 2.236rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-shadow: none;
+}
+
+#card-3 .badge-row {
+  position: absolute;
+  z-index: 2;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0;
+  pointer-events: none;
+}
+
+#card-3 .seal-fan {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+#card-3 .seal-fan-left { transform: translateY(-22px) rotate(-8deg); }
+#card-3 .seal-fan-right { transform: translateY(-22px) rotate(8deg); }
+
+#card-3 .seal {
+  --seal: #588b50;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 14px rgba(28, 18, 32, 0.22));
+  animation: seal-float 5.2s ease-in-out infinite;
+  container-type: inline-size;
+}
+
+#card-3 .seal-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+#card-3 .seal-edge {
+  fill: #fff;
+  stroke: var(--seal);
+  stroke-width: 4.2;
+  stroke-linejoin: round;
+}
+
+#card-3 .seal-ring {
+  fill: none;
+  stroke: var(--seal);
+  stroke-width: 1.45;
+}
+
+#card-3 .seal-label {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  color: var(--seal);
+  font-family: "Nunito", "Avenir Next", "Segoe UI", sans-serif;
+  font-weight: 800;
+  font-size: 11cqi;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+@media (max-height: 740px) {
+  #card-3 .hero-title { font-size: clamp(1.404rem, 7.41cqi, 1.885rem); top: 3.6%; }
+  #card-3 .badge-row { bottom: 6px; }
+  #card-3 .seal-fan-left,
+  #card-3 .seal-fan-right { transform: translateY(-14px) rotate(var(--fan, 8deg)); }
+  #card-3 .seal-fan-left { --fan: -8deg; }
 }
