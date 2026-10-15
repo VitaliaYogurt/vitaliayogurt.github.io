@@ -37,11 +37,15 @@ function packsLabel(n) {
 
 function applyPrices() {
   var price = money(config.pricePerPack);
-  var caption = "por cajita de " + jarsWord(config.jarsPerPack);
+  var jars = config.jarsPerPack;
+  var caption = "por cajita de " + jarsWord(jars);
   var free = "Envío gratis comprando " + config.freeDeliveryFromPacks + " cajitas";
   var fee = "Envío " + money(config.deliveryFee) + " en otros pedidos";
   document.getElementById("price-amount").textContent = price;
-  document.getElementById("price-caption").textContent = caption;
+  var note = document.getElementById("price-caption");
+  note.querySelector("[data-caption=lead]").textContent = "por cajita";
+  note.querySelector("[data-caption=mid]").textContent = "de " + jars;
+  note.querySelector("[data-caption=tail]").textContent = Number(jars) === 1 ? "frasco" : "frascos";
   document.getElementById("ship-free").textContent = free;
   var feeLine = document.getElementById("ship-fee");
   if (feeLine) feeLine.textContent = fee;
