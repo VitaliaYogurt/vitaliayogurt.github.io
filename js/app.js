@@ -90,14 +90,40 @@ function initCarousel() {
   var trackedCard = -1;
   var scrollTimer = null;
   var programmatic = false;
+  var cardQueue = [];
+  var goatTimer = null;
 
   function trackCardView(index) {
     index = Math.max(0, Math.min(cards.length - 1, index));
     if (index === trackedCard) return;
     trackedCard = index;
-    if (window.umami && typeof window.umami.track === "function") {
-      window.umami.track("card-view", { card: index + 1 });
-    }
+    queueCardView(index + 1);
+  }
+
+  function queueCardView(n) {
+    cardQueue.push({
+      path: "card-" + n,
+      title: "Card " + n,
+      event: true
+    });
+    flushCardViews();
+    if (!cardQueue.length || goatTimer) return;
+    var tries = 0;
+    goatTimer = setInterval(function () {
+      tries += 1;
+      flushCardViews();
+      if (!cardQueue.length || tries >= 150) {
+        clearInterval(goatTimer);
+        goatTimer = null;
+      }
+    }, 200);
+  }
+
+  function flushCardViews() {
+    if (!(window.goatcounter && typeof window.goatcounter.count === "function")) return;
+    cardQueue.splice(0).forEach(function (payload) {
+      window.goatcounter.count(payload);
+    });
   }
 
   function visibleCard() {
