@@ -87,6 +87,28 @@ function initCarousel() {
     dots.appendChild(dot);
   });
 
+  var trackedCard = -1;
+  var scrollTimer = null;
+  var programmatic = false;
+
+  function trackCardView(index) {
+    index = Math.max(0, Math.min(cards.length - 1, index));
+    if (index === trackedCard) return;
+    trackedCard = index;
+    if (window.umami && typeof window.umami.track === "function") {
+      window.umami.track("card-view", { card: index + 1 });
+    }
+  }
+
+  function visibleCard() {
+    var width = track.clientWidth || 1;
+    return Math.max(0, Math.min(cards.length - 1, Math.round(track.scrollLeft / width)));
+  }
+
+  function commitCardView() {
+    trackCardView(visibleCard());
+  }
+
   function setCurrent(index, announce) {
     index = Math.max(0, Math.min(cards.length - 1, index));
     var changed = index !== current;
@@ -105,20 +127,35 @@ function initCarousel() {
 
   function go(index) {
     index = Math.max(0, Math.min(cards.length - 1, index));
+    programmatic = true;
     track.scrollTo({
       left: cards[index].offsetLeft,
       behavior: reduced ? "auto" : "smooth"
     });
     setCurrent(index, true);
+    trackCardView(index);
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function () { programmatic = false; }, 700);
   }
 
   prev.addEventListener("click", function () { go(current - 1); });
   next.addEventListener("click", function () { go(current + 1); });
 
   track.addEventListener("scroll", function () {
-    var width = track.clientWidth || 1;
-    setCurrent(Math.round(track.scrollLeft / width), true);
+    if (!programmatic) setCurrent(visibleCard(), true);
+    if ("onscrollend" in window || programmatic) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(commitCardView, 160);
   }, { passive: true });
+
+  if ("onscrollend" in window) {
+    track.addEventListener("scrollend", function () {
+      programmatic = false;
+      clearTimeout(scrollTimer);
+      setCurrent(visibleCard(), true);
+      commitCardView();
+    });
+  }
 
   track.addEventListener("keydown", function (event) {
     if (event.key === "ArrowRight") { event.preventDefault(); go(current + 1); }
@@ -194,6 +231,7 @@ function initCarousel() {
   }
 
   setCurrent(0, false);
+  trackCardView(0);
   placeHero();
 }
 
