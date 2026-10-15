@@ -976,3 +976,45 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   #card-3 .seal-fan-right { transform: translateY(-14px) rotate(var(--fan, 8deg)); }
   #card-3 .seal-fan-left { --fan: -8deg; }
 }
+
+#card-4 .card-inner {
+  position: relative;
+  padding: 0;
+  gap: 0;
+  justify-content: flex-start;
+  overflow: hidden;
+  background: #e7b4b4 url("assets/card-4-poster.jpg") center top / cover no-repeat;
+  color: var(--ink);
+}
+
+#card-4 .hero-video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 190%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+#card-4 .hero-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 18px 18px 0;
+  text-align: center;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+#card-4 .eyebrow {
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+}

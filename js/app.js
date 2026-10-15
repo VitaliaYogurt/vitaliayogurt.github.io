@@ -32,18 +32,19 @@ function jarsWord(n) {
 }
 
 function packsLabel(n) {
-  return Number(n) === 1 ? "1 paquete" : n + " paquetes";
+  return Number(n) === 1 ? "1 cajita" : n + " cajitas";
 }
 
 function applyPrices() {
   var price = money(config.pricePerPack);
-  var caption = "por paquete de " + jarsWord(config.jarsPerPack);
-  var free = "Envío gratis comprando " + config.freeDeliveryFromPacks + " paquetes";
+  var caption = "por cajita de " + jarsWord(config.jarsPerPack);
+  var free = "Envío gratis comprando " + config.freeDeliveryFromPacks + " cajitas";
   var fee = "Envío " + money(config.deliveryFee) + " en otros pedidos";
   document.getElementById("price-amount").textContent = price;
   document.getElementById("price-caption").textContent = caption;
   document.getElementById("ship-free").textContent = free;
-  document.getElementById("ship-fee").textContent = fee;
+  var feeLine = document.getElementById("ship-fee");
+  if (feeLine) feeLine.textContent = fee;
   document.getElementById("unit-price").textContent = price + " " + caption;
   document.getElementById("rule-free").textContent = free;
   document.getElementById("rule-fee").textContent = fee;
@@ -163,21 +164,29 @@ function initCarousel() {
   track.addEventListener("pointercancel", endDrag);
 
   var heroVideo = document.querySelector("#card-1 .hero-video");
+  var priceVideo = document.querySelector("#card-4 .hero-video");
   if (heroVideo) heroVideo.muted = true;
+  if (priceVideo) priceVideo.muted = true;
+
+  function playClip(video) {
+    if (!video) return;
+    var pending = video.play();
+    if (pending && typeof pending.catch === "function") pending.catch(function () {});
+  }
 
   function syncHero(index) {
-    if (!heroVideo) return;
-    if (reduced) {
-      heroVideo.removeAttribute("autoplay");
-      heroVideo.pause();
-      return;
-    }
-    if (index === 0) {
-      var pending = heroVideo.play();
-      if (pending && typeof pending.catch === "function") pending.catch(function () {});
-    } else {
-      heroVideo.pause();
-    }
+    [heroVideo, priceVideo].forEach(function (video) {
+      if (!video) return;
+      if (reduced) {
+        video.removeAttribute("autoplay");
+        video.pause();
+      }
+    });
+    if (reduced) return;
+    if (index === 0) playClip(heroVideo);
+    else if (heroVideo) heroVideo.pause();
+    if (index === 3) playClip(priceVideo);
+    else if (priceVideo) priceVideo.pause();
   }
 
   setCurrent(0, false);
@@ -525,7 +534,7 @@ function validate() {
   var errors = [];
   var packs = readQty();
   if (!Number.isFinite(packs) || packs < 1 || packs > Number(config.maxPacks || 20)) {
-    errors.push(["qty", "Elige entre 1 y " + (config.maxPacks || 20) + " paquetes."]);
+    errors.push(["qty", "Elige entre 1 y " + (config.maxPacks || 20) + " cajitas."]);
   }
   var flavor = selectedFlavor();
   var known = (config.flavors || []).some(function (item) { return item.available && item.name === flavor; });

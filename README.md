@@ -4,7 +4,7 @@ Página para pedir el yogur de colágeno de Vitalia desde el celular. Está en e
 
 El cliente ve cuatro tarjetas, un botón para ordenar y un botón de WhatsApp. El pedido pide sabor, cantidad, un sábado, una hora entre 9:00 y 14:00, nombre, celular y dirección. Si el navegador deja, el cliente marca la puerta en un mapa.
 
-Un paquete de 4 frascos cuesta $9. El envío es $5. Con 2 paquetes o más, el envío es gratis.
+Una cajita de 4 frascos cuesta $9. El envío es $5. Con 2 cajitas o más, el envío es gratis.
 
 ## Verla en tu computadora
 
@@ -22,10 +22,10 @@ Abre `js/config.js`.
 
 - `whatsappNumber`: ya está el celular de Vitalia, `50768384321`.
 - `endpointUrl`: el enlace de Google. Déjalo como `""` hasta completar el paso de más abajo. Mientras esté vacío, la página igual muestra la confirmación y arma el mensaje de WhatsApp.
-- `pricePerPack`: precio de un paquete. Hoy es `9`.
-- `jarsPerPack`: frascos en cada paquete. Hoy es `4`.
-- `deliveryFee`: envío de un solo paquete. Hoy es `5`.
-- `freeDeliveryFromPacks`: desde cuántos paquetes el envío es gratis. Hoy es `2`.
+- `pricePerPack`: precio de una cajita. Hoy es `9`.
+- `jarsPerPack`: frascos en cada cajita. Hoy es `4`.
+- `deliveryFee`: envío de una sola cajita. Hoy es `5`.
+- `freeDeliveryFromPacks`: desde cuántas cajitas el envío es gratis. Hoy es `2`.
 - `flavors`: Natural se puede pedir. Mango y Vainilla dicen «Próximamente». Para activar uno, cambia su `available` a `true`.
 - `colors`: los colores de la página.
 - `cardImages`: déjalo en `null`. Cuando tengas fotos, pon la ruta de cada una, por ejemplo `"assets/cards/colageno.jpg"`.
@@ -97,7 +97,7 @@ Implementar → Administrar implementaciones → el lápiz → Versión: Nueva v
 
 ## Qué anota cada pedido
 
-Fecha y hora de Panamá, nombre, celular, sabor, paquetes, frascos, sábado, hora, dirección, latitud, longitud, un enlace para abrir el mapa, comentarios, subtotal, envío y total.
+Fecha y hora de Panamá, nombre, celular, sabor, cajitas, frascos, sábado, hora, dirección, latitud, longitud, un enlace para abrir el mapa, comentarios, subtotal, envío y total.
 
 ## Horario de entrega
 
