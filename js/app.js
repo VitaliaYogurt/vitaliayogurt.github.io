@@ -277,51 +277,6 @@ function placeHero() {
   var shipH = ship ? ship.offsetHeight + 16 : 36;
   var budget = Math.max(88, Math.min(jarTop - 22, h - shipH - 8));
   card.style.setProperty("--offer-budget", budget.toFixed(1) + "px");
-  fitOffer();
-}
-
-function fitOffer() {
-  var copy = document.querySelector("#card-1 .hero-copy");
-  var title = copy && copy.querySelector(".display");
-  var block = copy && copy.querySelector(".price-block");
-  var price = block && block.querySelector(".price");
-  var caption = block && block.querySelector(".price-caption");
-  if (!copy || !title || !block || !price || !caption) return;
-  var box = getComputedStyle(copy);
-  var padX = parseFloat(box.paddingLeft) + parseFloat(box.paddingRight);
-  var padY = parseFloat(box.paddingTop) + parseFloat(box.paddingBottom);
-  var gap = parseFloat(box.columnGap) || 0;
-  var innerH = copy.clientHeight - padY;
-  var colW = (copy.clientWidth - padX - gap) / 2;
-  if (innerH < 40 || colW < 40) return;
-
-  function largest(apply, el, limitW) {
-    var lo = 14;
-    var hi = innerH;
-    var best = lo;
-    var i;
-    for (i = 0; i < 16; i += 1) {
-      var mid = (lo + hi) / 2;
-      apply(mid);
-      var rect = el.getBoundingClientRect();
-      if (rect.width <= limitW && rect.height <= innerH) {
-        best = mid;
-        lo = mid;
-      } else {
-        hi = mid;
-      }
-    }
-    apply(best * 0.98);
-  }
-
-  largest(function (px) {
-    title.style.fontSize = px.toFixed(2) + "px";
-  }, title, colW);
-
-  largest(function (px) {
-    price.style.fontSize = px.toFixed(2) + "px";
-    caption.style.fontSize = (px * 0.3).toFixed(2) + "px";
-  }, block, colW);
 }
 
 window.addEventListener("resize", placeHero);
