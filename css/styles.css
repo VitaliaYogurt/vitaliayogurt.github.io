@@ -692,49 +692,51 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   left: 0;
   right: 0;
   z-index: 2;
-  height: var(--offer-budget, 32%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 2px;
+  height: var(--offer-budget, 34%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  column-gap: 10px;
   width: 100%;
-  padding: 8px 12px 6px;
+  padding: 8px 12px 2px;
   box-sizing: border-box;
-  text-align: center;
   color: var(--ink);
   pointer-events: none;
-  container-type: size;
 }
 
 #card-1 .display {
+  justify-self: end;
+  width: max-content;
+  margin: 0;
+  text-align: right;
   color: var(--ink);
-  font-size: 1.85rem;
+  font-size: 2.6rem;
+  line-height: 0.84;
+  letter-spacing: -0.03em;
 }
 
 #card-1 .price-block {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  justify-self: start;
+  width: max-content;
+  display: flex;
   align-items: center;
-  width: 100%;
+  gap: 6px;
   margin: 0;
 }
 
 #card-1 .price {
-  grid-column: 2;
   color: var(--ink);
-  font-size: 3.4rem;
+  font-size: 3.6rem;
+  line-height: 0.78;
 }
 
 #card-1 .price-caption {
-  grid-column: 3;
-  justify-self: start;
-  margin: 0 0 0 6px;
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 0.86rem;
-  line-height: 1.05;
+  font-size: 0.92rem;
+  line-height: 1.02;
   text-align: left;
   color: var(--ink);
 }
@@ -754,12 +756,6 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   line-height: 1.15;
   pointer-events: none;
   text-shadow: 0 0 10px rgba(255, 243, 238, 0.95), 0 1px 0 #fff;
-}
-
-@supports (font-size: 1cqh) {
-  #card-1 .display { font-size: clamp(1.35rem, 20cqh, 2.35rem); }
-  #card-1 .price { font-size: clamp(2.15rem, 32cqh, 4rem); }
-  #card-1 .price-caption { font-size: clamp(0.72rem, 9.5cqh, 0.95rem); }
 }
 
 @keyframes seal-float {
