@@ -257,21 +257,26 @@ function initCarousel() {
 
 function placeHero() {
   var card = document.querySelector("#card-1 .card-inner");
-  var copy = document.querySelector("#card-1 .hero-copy");
   var video = card && card.querySelector(".hero-video");
-  if (!card || !video) return;
+  if (!card) return;
+  if (video) video.style.transform = "";
   var w = card.clientWidth;
   var h = card.clientHeight;
   if (!w || !h) return;
-  var copyH = copy ? copy.offsetHeight : 0;
   var videoAspect = 1080 / 1920;
-  var jar = 0.3;
-  var dispH = w / h > videoAspect ? w / videoAspect : h;
-  var cropTop = Math.max(0, (dispH - h) / 2);
-  var jarTop = jar * dispH - cropTop;
-  var shift = Math.max(0, copyH + 10 - jarTop);
-  shift = Math.min(shift, h * 0.42);
-  video.style.transform = shift ? "translateY(" + shift.toFixed(1) + "px)" : "";
+  var jar = 0.343;
+  var jarTop;
+  if (w / h > videoAspect) {
+    var dispH = w / videoAspect;
+    var crop = (dispH - h) / 2;
+    jarTop = jar * dispH - crop;
+  } else {
+    jarTop = jar * h;
+  }
+  var ship = document.getElementById("ship-free");
+  var shipH = ship ? ship.offsetHeight + 16 : 36;
+  var budget = Math.max(88, Math.min(jarTop - 8, h - shipH - 8));
+  card.style.setProperty("--offer-budget", budget.toFixed(1) + "px");
 }
 
 window.addEventListener("resize", placeHero);
