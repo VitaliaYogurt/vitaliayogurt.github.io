@@ -695,22 +695,27 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   height: var(--offer-budget, 34%);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: end;
-  column-gap: 10px;
+  align-items: center;
+  column-gap: 28px;
   width: 100%;
-  padding: 8px 12px 2px;
+  padding: 6px 14px 4px;
   box-sizing: border-box;
   color: var(--ink);
   pointer-events: none;
+  container-type: size;
 }
 
 #card-1 .display {
   justify-self: end;
   width: max-content;
+  max-width: 100%;
   margin: 0;
   text-align: right;
+  white-space: nowrap;
+  text-wrap: nowrap;
   color: var(--ink);
-  font-size: 2.6rem;
+  font-size: 2.35rem;
+  font-size: min(15.2cqw, 48cqh);
   line-height: 0.84;
   letter-spacing: -0.03em;
 }
@@ -718,15 +723,18 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 #card-1 .price-block {
   justify-self: start;
   width: max-content;
+  max-width: 100%;
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 6px;
   margin: 0;
 }
 
 #card-1 .price {
   color: var(--ink);
-  font-size: 3.6rem;
+  font-size: 3.2rem;
+  font-size: min(19.2cqw, 70cqh);
   line-height: 0.78;
 }
 
@@ -735,7 +743,8 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  font-size: min(5.76cqw, 21cqh);
   line-height: 1.02;
   text-align: left;
   color: var(--ink);
