@@ -2,7 +2,7 @@
 
 Página para pedir el yogur de colágeno de Vitalia desde el celular. Está en español, no tiene servidor de pago y se puede publicar gratis.
 
-El cliente ve tres tarjetas, un botón para ordenar y un botón de WhatsApp. El pedido pide sabor, cantidad, un sábado, una hora entre 9:00 y 14:00, nombre, celular y dirección. Si el navegador deja, el cliente marca la puerta en un mapa.
+El cliente ve tres tarjetas, un botón para ordenar y un botón de WhatsApp. El pedido pide sabor, cantidad, un sábado, una hora entre 9:00 y 14:00, nombre y dirección. El celular no se pide: el pedido se confirma por WhatsApp. Si el navegador deja, el cliente marca la puerta en un mapa.
 
 Una cajita de 4 frascos cuesta $9. El envío es $5. Con 2 cajitas o más, el envío es gratis.
 
@@ -97,7 +97,7 @@ Implementar → Administrar implementaciones → el lápiz → Versión: Nueva v
 
 ## Qué anota cada pedido
 
-Fecha y hora de Panamá, nombre, celular, sabor, cajitas, frascos, sábado, hora, dirección, latitud, longitud, un enlace para abrir el mapa, comentarios, subtotal, envío y total.
+Fecha y hora de Panamá, nombre, sabor, cajitas, frascos, sábado, hora, dirección, latitud, longitud, un enlace para abrir el mapa, comentarios, subtotal, envío y total. La columna Celular de la hoja queda vacía.
 
 ## Horario de entrega
 

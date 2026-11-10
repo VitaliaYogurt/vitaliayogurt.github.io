@@ -275,7 +275,7 @@ img { display: block; }
 .bar {
   flex: none;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 10px;
   padding: 10px 12px 2px;
   background: #fff;
@@ -283,11 +283,15 @@ img { display: block; }
 }
 
 #wa-bar {
-  font-size: 0.9rem;
-  letter-spacing: -0.015em;
-  padding-left: 12px;
-  padding-right: 12px;
+  font-size: 0.84rem;
+  line-height: 1.05;
+  padding: 6px 10px;
   gap: 6px;
+}
+
+#wa-bar .wa-copy {
+  display: block;
+  text-align: left;
 }
 
 .foot {
@@ -654,7 +658,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 @media (max-width: 360px) {
   .bar { gap: 8px; padding-left: 10px; padding-right: 10px; }
   .btn { font-size: 0.92rem; padding: 0 12px; }
-  #wa-bar { font-size: 0.78rem; padding-left: 8px; padding-right: 8px; }
+  #wa-bar { font-size: 0.76rem; padding-left: 8px; padding-right: 8px; gap: 4px; }
 }
 
 @media (max-height: 740px) {
