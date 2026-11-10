@@ -231,9 +231,7 @@ function initCarousel() {
   track.addEventListener("pointercancel", endDrag);
 
   var heroVideo = document.querySelector("#card-1 .hero-video");
-  var priceVideo = document.querySelector("#card-4 .hero-video");
   if (heroVideo) heroVideo.muted = true;
-  if (priceVideo) priceVideo.muted = true;
 
   function playClip(video) {
     if (!video) return;
@@ -242,18 +240,14 @@ function initCarousel() {
   }
 
   function syncHero(index) {
-    [heroVideo, priceVideo].forEach(function (video) {
-      if (!video) return;
-      if (reduced) {
-        video.removeAttribute("autoplay");
-        video.pause();
-      }
-    });
-    if (reduced) return;
+    if (!heroVideo) return;
+    if (reduced) {
+      heroVideo.removeAttribute("autoplay");
+      heroVideo.pause();
+      return;
+    }
     if (index === 0) playClip(heroVideo);
-    else if (heroVideo) heroVideo.pause();
-    if (index === 3) playClip(priceVideo);
-    else if (priceVideo) priceVideo.pause();
+    else heroVideo.pause();
   }
 
   setCurrent(0, false);
@@ -263,22 +257,21 @@ function initCarousel() {
 
 function placeHero() {
   var card = document.querySelector("#card-1 .card-inner");
-  if (!card) return;
+  var copy = document.querySelector("#card-1 .hero-copy");
+  var video = card && card.querySelector(".hero-video");
+  if (!card || !video) return;
   var w = card.clientWidth;
   var h = card.clientHeight;
   if (!w || !h) return;
+  var copyH = copy ? copy.offsetHeight : 0;
   var videoAspect = 1080 / 1920;
-  var jar = 0.343;
-  var top;
-  if (w / h > videoAspect) {
-    var dispH = w / videoAspect;
-    var crop = (dispH - h) / 2;
-    top = (jar * dispH - crop) / h;
-  } else {
-    top = jar;
-  }
-  top = Math.max(0.16, Math.min(0.62, top));
-  card.style.setProperty("--jar-top", (top * 100).toFixed(2) + "%");
+  var jar = 0.3;
+  var dispH = w / h > videoAspect ? w / videoAspect : h;
+  var cropTop = Math.max(0, (dispH - h) / 2);
+  var jarTop = jar * dispH - cropTop;
+  var shift = Math.max(0, copyH + 10 - jarTop);
+  shift = Math.min(shift, h * 0.42);
+  video.style.transform = shift ? "translateY(" + shift.toFixed(1) + "px)" : "";
 }
 
 window.addEventListener("resize", placeHero);
@@ -332,8 +325,7 @@ function initOrder() {
     form.hidden = false;
     title.textContent = "Tu pedido";
     dialog.showModal();
-    if (locationState.mode === "idle") startLocate();
-    else if (locationState.mode === "map") setTimeout(function () { if (map) map.invalidateSize(); }, 180);
+    if (locationState.mode === "map") setTimeout(function () { if (map) map.invalidateSize(); }, 180);
   });
 
   document.getElementById("order-close").addEventListener("click", function () { dialog.close(); });
@@ -354,6 +346,8 @@ function initOrder() {
     resetOrder();
     title.textContent = "Tu pedido";
   });
+
+  if (locationState.mode === "idle") useManual("Escribe calle, edificio y barrio.");
 }
 
 function renderFlavors() {
@@ -411,6 +405,16 @@ function updateTotals() {
   document.getElementById("sum-sub").textContent = money(sub);
   document.getElementById("sum-ship").textContent = ship === 0 ? "Gratis" : money(ship);
   document.getElementById("sum-total").textContent = money(sub + ship);
+  var note = document.getElementById("sum-note");
+  if (note) {
+    if (ship > 0) {
+      note.hidden = false;
+      note.textContent = "Total " + money(sub + ship) + " (incluye envío " + money(ship) + ")";
+    } else {
+      note.hidden = true;
+      note.textContent = "";
+    }
+  }
   document.getElementById("jar-count").textContent = packsLabel(packs) + " · " + jarsWord(packs * config.jarsPerPack);
   document.getElementById("qty-minus").disabled = packs <= 1;
   document.getElementById("qty-plus").disabled = packs >= Number(config.maxPacks || 20);
@@ -785,7 +789,7 @@ function resetOrder() {
   document.getElementById("order-form").reset();
   document.getElementById("order-form").hidden = false;
   document.getElementById("confirm").hidden = true;
-  document.getElementById("qty").value = "1";
+  document.getElementById("qty").value = "2";
   clearErrors();
   fillDates();
   updateTotals();

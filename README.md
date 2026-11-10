@@ -2,7 +2,7 @@
 
 Página para pedir el yogur de colágeno de Vitalia desde el celular. Está en español, no tiene servidor de pago y se puede publicar gratis.
 
-El cliente ve cuatro tarjetas, un botón para ordenar y un botón de WhatsApp. El pedido pide sabor, cantidad, un sábado, una hora entre 9:00 y 14:00, nombre, celular y dirección. Si el navegador deja, el cliente marca la puerta en un mapa.
+El cliente ve tres tarjetas, un botón para ordenar y un botón de WhatsApp. El pedido pide sabor, cantidad, un sábado, una hora entre 9:00 y 14:00, nombre, celular y dirección. Si el navegador deja, el cliente marca la puerta en un mapa.
 
 Una cajita de 4 frascos cuesta $9. El envío es $5. Con 2 cajitas o más, el envío es gratis.
 
