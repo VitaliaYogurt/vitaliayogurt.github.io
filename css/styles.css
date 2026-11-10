@@ -131,7 +131,6 @@ img { display: block; }
 .card:nth-child(1) .card-inner { background: var(--strawberry); }
 .card:nth-child(2) .card-inner { background: var(--butter); }
 .card:nth-child(3) .card-inner { background: var(--mint); }
-.card:nth-child(4) .card-inner { background: var(--berry); color: #fff; }
 
 .card-media:not(:has(img)) { display: none; }
 
@@ -276,11 +275,19 @@ img { display: block; }
 .bar {
   flex: none;
   display: grid;
-  grid-template-columns: 1.35fr 0.9fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr);
   gap: 10px;
   padding: 10px 12px 2px;
   background: #fff;
   box-shadow: 0 -10px 24px rgba(28, 18, 32, 0.06);
+}
+
+#wa-bar {
+  font-size: 0.9rem;
+  letter-spacing: -0.015em;
+  padding-left: 12px;
+  padding-right: 12px;
+  gap: 6px;
 }
 
 .foot {
@@ -438,6 +445,14 @@ dialog::backdrop { background: rgba(28, 18, 32, 0.45); }
   line-height: 0.85;
   color: var(--berry);
   letter-spacing: -0.03em;
+}
+
+.total-note {
+  margin: 4px 0 8px;
+  text-align: center;
+  font-weight: 800;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 .field {
@@ -639,6 +654,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 @media (max-width: 360px) {
   .bar { gap: 8px; padding-left: 10px; padding-right: 10px; }
   .btn { font-size: 0.92rem; padding: 0 12px; }
+  #wa-bar { font-size: 0.78rem; padding-left: 8px; padding-right: 8px; }
 }
 
 @media (max-height: 740px) {
@@ -664,7 +680,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   z-index: 0;
   pointer-events: none;
   background: transparent;
@@ -675,81 +691,61 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: none;
+  background: linear-gradient(to bottom, rgba(255, 243, 238, 0.72) 0%, rgba(255, 243, 238, 0.28) 28%, rgba(255, 243, 238, 0) 48%);
 }
 
 #card-1 .hero-copy {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
-  pointer-events: none;
-}
-
-#card-1 .hero-title {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  top: var(--jar-top, 34.3%);
-  margin: 0;
-  transform: translateY(calc(-100% - 10px));
-  text-align: center;
-  font-family: "Anton", "Arial Narrow", Impact, sans-serif;
-  font-size: clamp(1.35rem, 7cqi, 1.9rem);
-  line-height: 1.05;
-  letter-spacing: 0.01em;
-  color: #fff;
-  font-weight: 700;
-  text-wrap: balance;
-}
-
-#card-1 .seal {
-  --seal: #588b50;
-  position: absolute;
-  z-index: 2;
-  right: 6px;
-  bottom: 8px;
-  width: clamp(109px, 30.8cqi, 134px);
-  aspect-ratio: 1;
-  pointer-events: none;
-  filter: drop-shadow(0 8px 14px rgba(28, 18, 32, 0.22));
-  animation: seal-float 5.2s ease-in-out infinite;
-  container-type: inline-size;
-}
-
-#card-1 .seal-svg {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-#card-1 .seal-edge {
-  fill: #fff;
-  stroke: var(--seal);
-  stroke-width: 4.2;
-  stroke-linejoin: round;
-}
-
-#card-1 .seal-ring {
-  fill: none;
-  stroke: var(--seal);
-  stroke-width: 1.45;
-}
-
-#card-1 .seal-label {
-  position: absolute;
-  left: 18%;
-  right: 18%;
-  top: 50%;
-  margin: 0;
-  transform: translateY(-50%);
+  padding: 12px 14px 0;
   text-align: center;
-  color: var(--seal);
-  font-family: "Nunito", "Avenir Next", "Segoe UI", sans-serif;
-  font-weight: 800;
-  font-size: 12.4cqi;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  color: var(--ink);
+  pointer-events: none;
+}
+
+#card-1 .eyebrow { font-size: 0.9rem; }
+
+#card-1 .display { color: var(--ink); }
+
+#card-1 .price-block {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+}
+
+#card-1 .price {
+  grid-column: 2;
+  color: var(--ink);
+}
+
+#card-1 .price-caption {
+  grid-column: 3;
+  justify-self: start;
+  margin: 0 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1rem;
+  line-height: 1.08;
+  text-align: left;
+  color: var(--ink);
+}
+
+#card-1 .price-caption span { white-space: nowrap; }
+
+#card-1 .ship-line {
+  font-size: 1.15rem;
+  color: var(--ink);
 }
 
 @keyframes seal-float {
@@ -758,18 +754,18 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 }
 
 @media (max-height: 740px) {
-  #card-1 .hero-title { font-size: clamp(1.2rem, 6.4cqi, 1.6rem); }
-  #card-1 .seal { width: clamp(101px, 28cqi, 120px); bottom: 6px; right: 6px; }
+  #card-1 .hero-copy { gap: 4px; padding-top: 8px; }
+  #card-1 .display { font-size: clamp(2.15rem, 12cqi, 3rem); }
+  #card-1 .price { font-size: 4.1rem; }
+  #card-1 .ship-line { font-size: 1rem; }
 }
 
 @media (max-width: 340px) {
-  #card-1 .hero-title { font-size: clamp(1.12rem, 6.2cqi, 1.45rem); }
-  #card-1 .seal { width: clamp(95px, 30.8cqi, 112px); right: 4px; bottom: 6px; }
+  #card-1 .price-caption { font-size: 0.88rem; margin-left: 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .dot::after { transition: none; }
-  #card-1 .seal,
   #card-2 .seal,
   #card-3 .seal { animation: none; }
 }
@@ -797,11 +793,22 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   z-index: 0;
 }
 
-#card-2 .hero-title {
+#card-2 .card-2-copy {
   position: absolute;
   z-index: 2;
-  top: 6%;
-  right: 8px;
+  top: 5%;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: none;
+}
+
+#card-2 .hero-title {
+  position: relative;
+  top: auto;
+  right: auto;
   left: auto;
   width: max-content;
   margin: 0;
@@ -815,7 +822,22 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   text-shadow: none;
 }
 
-#card-2 .seal {
+#card-2 .card-2-copy .seal {
+  --seal: #588b50;
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  width: clamp(92px, 26cqi, 118px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 14px rgba(28, 18, 32, 0.22));
+  animation: seal-float 5.2s ease-in-out infinite;
+  container-type: inline-size;
+}
+
+#card-2 .card-inner > .seal {
   --seal: #588b50;
   position: absolute;
   z-index: 2;
@@ -867,13 +889,16 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 }
 
 @media (max-height: 740px) {
-  #card-2 .hero-title { font-size: clamp(1.4rem, 7.6cqi, 2rem); top: 5%; }
-  #card-2 .seal { width: clamp(101px, 28cqi, 120px); bottom: 10px; left: 8px; }
+  #card-2 .card-2-copy { top: 4%; right: 8px; }
+  #card-2 .hero-title { font-size: clamp(1.4rem, 7.6cqi, 2rem); }
+  #card-2 .card-2-copy .seal { width: clamp(84px, 24cqi, 104px); }
+  #card-2 .card-inner > .seal { width: clamp(101px, 28cqi, 120px); bottom: 10px; left: 8px; }
 }
 
 @media (max-width: 340px) {
-  #card-2 .hero-title { font-size: clamp(1.28rem, 7.2cqi, 1.7rem); right: 6px; }
-  #card-2 .seal { width: clamp(95px, 30.8cqi, 112px); left: 6px; bottom: 8px; }
+  #card-2 .card-2-copy { right: 6px; }
+  #card-2 .hero-title { font-size: clamp(1.28rem, 7.2cqi, 1.7rem); }
+  #card-2 .card-inner > .seal { width: clamp(95px, 30.8cqi, 112px); left: 6px; bottom: 8px; }
 }
 
 #card-3 .card-inner {
@@ -995,89 +1020,3 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
   #card-3 .seal-fan-left { --fan: -8deg; }
 }
 
-#card-4 .card-inner {
-  position: relative;
-  padding: 0;
-  gap: 0;
-  justify-content: flex-start;
-  overflow: hidden;
-  background: #e1bab7 url("assets/card-4-poster.jpg") center / cover no-repeat;
-  color: #fff;
-}
-
-#card-4 .hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  z-index: 0;
-  pointer-events: none;
-  background: transparent;
-}
-
-#card-4 .hero-copy {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  padding: 18px 18px 0;
-  text-align: center;
-  color: #fff;
-  pointer-events: none;
-}
-
-#card-4 .eyebrow {
-  font-size: 0.9rem;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-#card-4 .price-block {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  width: 100%;
-}
-
-#card-4 .price { grid-column: 2; }
-
-#card-4 .price-caption {
-  grid-column: 3;
-  justify-self: start;
-  margin: 0 0 0 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 1rem;
-  line-height: 1.08;
-  text-align: left;
-}
-
-#card-4 .price-caption span { white-space: nowrap; }
-
-#card-4 .ship-line { font-size: 1.3125rem; }
-
-@media (max-width: 520px) {
-  #card-4 .hero-copy { gap: 8px; }
-}
-
-@media (max-width: 520px) and (min-height: 741px) {
-  #card-4 .hero-copy { gap: 6px; padding-top: 8px; }
-  #card-4 .hero-video {
-    height: 110%;
-    object-position: center top;
-  }
-  #card-4 .card-inner {
-    background-position: center top;
-    background-size: 100% 110%;
-  }
-}
-
-@media (max-width: 520px) and (max-height: 740px) {
-  #card-4 .hero-copy { gap: 6px; padding-top: 10px; }
-}
