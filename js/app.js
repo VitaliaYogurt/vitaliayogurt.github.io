@@ -305,10 +305,6 @@ function initOrder() {
     setQty(readQty());
   });
   document.getElementById("fecha").addEventListener("change", fillTimes);
-  document.getElementById("celular").addEventListener("blur", function (event) {
-    var national = parsePhone(event.target.value);
-    if (national) event.target.value = formatPhone(national);
-  });
   document.getElementById("loc-alt").addEventListener("click", function () {
     if (locationState.mode === "manual") startLocate();
     else useManual("Escribe calle, edificio y barrio.");
@@ -536,20 +532,6 @@ function fillTimes() {
   });
 }
 
-function parsePhone(raw) {
-  var digits = String(raw || "").replace(/\D/g, "");
-  if (digits.indexOf("00") === 0) digits = digits.slice(2);
-  if (digits.indexOf("507") === 0 && (digits.length === 10 || digits.length === 11)) digits = digits.slice(3);
-  if ((digits.length === 8 || digits.length === 7) && digits.charAt(0) !== "0") return digits;
-  return null;
-}
-
-function formatPhone(national) {
-  if (!national) return "";
-  if (national.length === 8) return "+507 " + national.slice(0, 4) + " " + national.slice(4);
-  return "+507 " + national.slice(0, 3) + " " + national.slice(3);
-}
-
 function validName(value) {
   var name = value.trim().replace(/\s+/g, " ");
   if (name.length < 2 || name.length > 80) return false;
@@ -621,7 +603,6 @@ function validate() {
   var hora = document.getElementById("hora").value;
   if (!day || day.slots.indexOf(hora) === -1) errors.push(["hora", "Elige un horario entre 9:00 y 14:00."]);
   if (!validName(document.getElementById("nombre").value)) errors.push(["nombre", "Escribe tu nombre."]);
-  if (!parsePhone(document.getElementById("celular").value)) errors.push(["celular", "Escribe un celular de Panamá, por ejemplo 6838 4321."]);
   if (locationState.mode === "map") {
     if (!Number.isFinite(locationState.lat) || !Number.isFinite(locationState.lng)) {
       errors.push(["direccion", "Arrastra el pin hasta el punto de entrega."]);
@@ -647,7 +628,6 @@ function buildOrder() {
     : (locationState.address || ("Pin en el mapa (" + locationState.lat.toFixed(5) + ", " + locationState.lng.toFixed(5) + ")"));
   return {
     nombre: document.getElementById("nombre").value.trim().replace(/\s+/g, " "),
-    celular: formatPhone(parsePhone(document.getElementById("celular").value)),
     sabor: selectedFlavor(),
     paquetes: packs,
     frascos: packs * Number(config.jarsPerPack),
@@ -687,7 +667,6 @@ function orderMessage(order) {
     "Cantidad: " + packsLabel(order.paquetes) + " (" + jarsWord(order.frascos) + ")",
     "Entrega: " + order.fecha + ", " + order.hora,
     "Nombre: " + order.nombre,
-    "Celular: " + order.celular,
     "Dirección: " + order.direccion
   ];
   if (order.maps) lines.push("Mapa: " + order.maps);
@@ -767,7 +746,6 @@ function showConfirmation(order, status) {
     ["Cantidad", packsLabel(order.paquetes) + " · " + jarsWord(order.frascos)],
     ["Entrega", order.fecha + ", " + order.hora],
     ["Nombre", order.nombre],
-    ["Celular", order.celular],
     ["Dirección", order.direccion]
   ];
   if (order.comentarios) rows.push(["Comentarios", order.comentarios]);
